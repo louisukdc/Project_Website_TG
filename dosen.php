@@ -159,36 +159,9 @@ if (isset($_GET['hal']) && $_GET['hal'] == "edit" && isset($_GET['id']))
                 <td>
                     <a href="dosen.php?hal=hapus&id=<?=$data['kode']?>">Hapus</a>
                     <!-- Tambahkan kode HTML ini pada tempat yang diinginkan di halaman -->
-                    <!-- <a onclick="showPopup()" type="submit" href="#?id=<?php echo $data['kode']; ?>">Edit</a> -->
+                    <a onclick="showPopup()" type="submit" href="#?id=<?php echo $data['kode']; ?>">Edit</a>
 
-        <button onclick="showPopup()" type="submit"<?php echo $data['kode'];?> class="edit_btn">Edit </button>
-         <div id="popup">
-
-<!-- Form Edit Data -->
-<div id="edit_popup">
-  <span class="span-header"><h2>Edit Data Dosen</h2></span>
-  <span id="edit_popup-close" onclick="hideEditPopup()">X</span>
-  <form action="" method="post">
-    <input type="hidden" name="kode" value="<?php echo $data['kode'];?>">
-    <label>Semester</label>
-    <input type="text" name="semester" value="<?php echo $data['semester'];?>" placeholder="Masukkan Semester">
-    <br>
-    <label>Matakuliah</label>
-    <input type="text" name="matakuliah" value="<?php echo $data['matakuliah'];?>" placeholder="Masukkan Matakuliah">
-    <br>
-    <label>Dosen</label>
-    <input type="text" name="dosen" value="<?php echo $data['dosen'];?>" placeholder="Masukkan Nama Dosen">
-    <br>
-    <label>Ruang</label>
-    <input type="text" name="ruang" value="<?php echo $data['ruang'];?>" placeholder="Masukkan Ruang">
-    <br>
-    <label>Waktu</label>
-    <input type="text" name="waktu" value="<?php echo $data['waktu'];?>" placeholder="Masukkan Waktu">
-    <br>
-    <button type="submit" name="update">Update</button>
-  </form>
-</div>
-
+        
 
                 </td>
             </tr>
