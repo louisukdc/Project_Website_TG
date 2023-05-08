@@ -26,26 +26,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 <div class="content">
   <form action="proses.php" method="post">
-    <label>Kode</label>
-    <input type="text" name="kode" id="kode" value="<?=$kode?>">
-    <br>
+  <input type="hidden" name="kode" value="<?php echo $data['kode'];?>">
     <label>Semester</label>
-    <input type="text" name="semester" id="semester" value="<?=$semester?>" >
+    <input type="text" name="semester" value="<?php echo $data['semester'];?>" placeholder="Masukkan Semester">
     <br>
     <label>Matakuliah</label>
-    <input type="text" name="matakuliah" id="matakuliah" value="<?=$matakuliah?>">
+    <input type="text" name="matakuliah" value="<?php echo $data['matakuliah'];?>" placeholder="Masukkan Matakuliah">
     <br>
     <label>Dosen</label>
-    <input type="text" name="dosen" id="dosen" value="<?=$dosen?>">
+    <input type="text" name="dosen" value="<?php echo $data['dosen'];?>" placeholder="Masukkan Nama Dosen">
     <br>
     <label>Ruang</label>
-    <input type="text" name="ruang" id="ruang" value="<?=$ruang?>">
+    <input type="text" name="ruang" value="<?php echo $data['ruang'];?>" placeholder="Masukkan Ruang">
     <br>
-    <label>Hari / Tanggal</label>
-    <input type="date" name="waktu" id="waktu">
+    <label>Waktu</label>
+    <input type="text" name="waktu" value="<?php echo $data['waktu'];?>" placeholder="Masukkan Waktu">
     <br>
     <input type="submit" value="Simpan">
   </form>
 </div>
 </body>
 </html>
+
