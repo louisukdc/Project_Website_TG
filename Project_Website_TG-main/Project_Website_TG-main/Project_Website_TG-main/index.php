@@ -1,5 +1,3 @@
-//how to make this file have updtae feathure?$_COOKIE
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

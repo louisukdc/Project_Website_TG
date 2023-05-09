@@ -1,5 +1,3 @@
-//how to make this file have updtae feathure?$_COOKIE
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +16,7 @@
         <i class="fas fa-bars" id="sidebar_btn"></i>
     </label>
     <div class="left_area">
-        <h3>Dashboard</h3>
+        <h3>Operator</h3>
     </div>
 </header>
 <!--header area end-->
@@ -48,22 +46,15 @@
     <a href= dosen.php ><i class="fas fa-cogs"></i><span>Dosen</span></a>
     <a href= matkul.php ><i class="fas fa-table"></i><span>Matakuliah</span></a>
     <a href= operator.php ><i class="fas fa-th"></i><span>Operator</span></a>
+
 </div>
 <!--sidebar end-->
 
 <div class="content">
     <div class="card">
-        <div class="card">
-        <select name="Tahun" id="Tahun">
-            <option value="2020/1">2020/1</option>
-            <option value="2020/2">2020/2</option>
-            <option value="2021/1">2021/1</option>
-            <option value="2021/2">2021/2</option>
-          </select>
-        </div>
-
+        <button type="submit">Tambah</button>
+        <br>
 <br>
-
         <input type="text" name="show" id="show">
         <label for="show">Show</label>
 
@@ -72,17 +63,13 @@
 
         <input type="text" name="show" id="show">
         <label for="show">Search</label>        
-
 <br>
 <br>
         <table border="2">
             <tr>
-                <th>Kode</th>
-                <th>Semester</th>
-                <th>Matakuliah</th>
-                <th>Dosen</th>
-                <th>Ruang</th>
-                <th>Hari/Tanggal</th>
+                <th>Nama</th>
+                <th>Username</th>
+                <th>Email</th>
                 <th>Aksi</th>
             </tr>
             <?php 
