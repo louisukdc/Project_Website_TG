@@ -14,7 +14,37 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
     }
 }
 
+if(isset($_POST['update'])){
+    $kode = $_POST['kode'];
+    $semester = $_POST['semester'];
+    $matakuliah = $_POST['matakuliah'];
+    $dosen = $_POST['dosen'];
+    $ruang = $_POST['ruang'];
+    $waktu = $_POST['waktu'];
+
+    $update = mysqli_query($con, "UPDATE t_dosen SET semester='$semester', matakuliah='$matakuliah', dosen='$dosen', ruang='$ruang', waktu='$waktu' WHERE kode='$kode'");
+    
+    if($update){
+        echo "<script>alert('Data Berhasil Diupdate');
+        window.location='dosen.php';        
+        </script>";
+    } else {
+        echo "<script>alert('Data Gagal Diupdate');
+        window.location='dosen.php';        
+        </script>";
+    }
+}
+
+
+if (isset($_GET['hal']) && $_GET['hal'] == "edit" && isset($_GET['id']))
+    $id = $_GET['id'];
+    $query = mysqli_query($con, "SELECT * FROM t_dosen WHERE kode='$id'");
+    $data = mysqli_fetch_array($query);
+
+    
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -129,8 +159,12 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
                 <td><?=$data['ruang'];?></td>
                 <td><?=$data['hari'];?></td>
                 <td>
-                    <a href="#">Edit</a>
-                    <a href="dosen.php?hal=hapus&id=<?=$data['kode']?>">Hapus</a>
+                <a href="?hal=hapus&id=<?php echo $data['kode']; ?>" title="Hapus Data" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')"><i class="fas fa-trash"></i>Hapus</a>
+                    <!-- Tambahkan kode HTML ini pada tempat yang diinginkan di halaman -->
+                    <a onclick="showPopup()" type="submit" href="#?id=<?php echo $data['kode']; ?>">Edit</a>
+
+        
+
                 </td>
             </tr>
             <?php endwhile; } ?>
@@ -138,3 +172,4 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
 </div>
 </body>
 </html>
+
