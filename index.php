@@ -1,4 +1,11 @@
-//how to make this file have updtae feathure?$_COOKIE
+<?php
+    session_start(); // Memulai session
+
+    if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
+        header("Location: login.php"); // Redirect ke halaman login
+        exit;
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +55,7 @@
     <a href= dosen.php ><i class="fas fa-cogs"></i><span>Dosen</span></a>
     <a href= matkul.php ><i class="fas fa-table"></i><span>Matakuliah</span></a>
     <a href= operator.php ><i class="fas fa-th"></i><span>Operator</span></a>
+    <a href= logout.php ><i class="logout"></i><span>Log Out</span></a>
 </div>
 <!--sidebar end-->
 

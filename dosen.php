@@ -1,5 +1,13 @@
 <?php 
+session_start(); // Memulai session
+
+if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
+    header("Location: login.php"); // Redirect ke halaman login
+    exit;
+}
+
 include 'koneksi.php';
+
 if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
     $id = $_GET['id'];
     $hapus = mysqli_query($con, "DELETE FROM t_dosen WHERE kode = '$id'");
@@ -14,37 +22,7 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
     }
 }
 
-if(isset($_POST['update'])){
-    $kode = $_POST['kode'];
-    $semester = $_POST['semester'];
-    $matakuliah = $_POST['matakuliah'];
-    $dosen = $_POST['dosen'];
-    $ruang = $_POST['ruang'];
-    $waktu = $_POST['waktu'];
-
-    $update = mysqli_query($con, "UPDATE t_dosen SET semester='$semester', matakuliah='$matakuliah', dosen='$dosen', ruang='$ruang', waktu='$waktu' WHERE kode='$kode'");
-    
-    if($update){
-        echo "<script>alert('Data Berhasil Diupdate');
-        window.location='dosen.php';        
-        </script>";
-    } else {
-        echo "<script>alert('Data Gagal Diupdate');
-        window.location='dosen.php';        
-        </script>";
-    }
-}
-
-
-if (isset($_GET['hal']) && $_GET['hal'] == "edit" && isset($_GET['id']))
-    $id = $_GET['id'];
-    $query = mysqli_query($con, "SELECT * FROM t_dosen WHERE kode='$id'");
-    $data = mysqli_fetch_array($query);
-
-    
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +33,85 @@ if (isset($_GET['hal']) && $_GET['hal'] == "edit" && isset($_GET['id']))
 
     <link rel="stylesheet" href="style/navbar_style.css">
     <script src="js/jquery.min.js"></script>
+    <style>
+        .popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 9999;
+}
+
+.popup form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.popup form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.popup form input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.popup form input[type="submit"]{
+  background-color: #4CAF50;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.popup form input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+
+.span-header {
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #333;
+  border-radius: 50%;
+  padding: 5px 8px;
+  line-height: 1;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#popup-close:hover {
+  background-color: #555;
+}
+
+    </style>
 </head>
 <body>
     <input type="checkbox" id="check">
@@ -94,6 +151,7 @@ if (isset($_GET['hal']) && $_GET['hal'] == "edit" && isset($_GET['id']))
     <a href= dosen.php ><i class="fas fa-cogs"></i><span>Dosen</span></a>
     <a href= matkul.php ><i class="fas fa-table"></i><span>Matakuliah</span></a>
     <a href= operator.php ><i class="fas fa-th"></i><span>Operator</span></a>
+    <a href= logout.php ><i class="logout"></i><span>Log Out</span></a>
 
 </div>
 <!--sidebar end-->
@@ -159,17 +217,47 @@ if (isset($_GET['hal']) && $_GET['hal'] == "edit" && isset($_GET['id']))
                 <td><?=$data['ruang'];?></td>
                 <td><?=$data['hari'];?></td>
                 <td>
-                <a href="?hal=hapus&id=<?php echo $data['kode']; ?>" title="Hapus Data" onclick="return confirm('Apakah Anda Yakin Ingin Menghapus Data Ini?')"><i class="fas fa-trash"></i>Hapus</a>
-                    <!-- Tambahkan kode HTML ini pada tempat yang diinginkan di halaman -->
-                    <a onclick="showPopup()" type="submit" href="#?id=<?php echo $data['kode']; ?>">Edit</a>
-
-        
-
+                    <a href="#?hal=edit&id=<?=$data['kode']?>" onclick="togglePopup()">Edit</a>
+                    <a href="dosen.php?hal=hapus&id=<?=$data['kode']?>">Hapus</a>
                 </td>
             </tr>
             <?php endwhile; } ?>
         </table>
+        <div class="popup" id="myPopup">
+        <span id="popup-close" onclick="togglePopup()">&times;</span>
+        <form action="update.php" method="post">
+            <label>Kode</label>
+            <input type="text" name="kode" id="kode" placeholder="Masukkan Kode Dosen" value="<?=@$kode?>">
+            <br>
+            <label>Semester</label>
+            <input type="text" name="semester" id="semester" placeholder="Masukkan Semester" value="<?=@$semester?>">
+            <br>
+            <label>Matakuliah</label>
+            <input type="text" name="matakuliah" id="matakuliah" placeholder="Masukkan Matakuliah" value="<?=@$matakuliah?>">
+            <br>
+            <label>Dosen</label>
+            <input type="text" name="dosen" id="dosen" placeholder="Masukkan Nama Dosen" value="<?=@$dosen?>">
+            <br>
+            <label>Ruang</label>
+            <input type="text" name="ruang" id="ruang" placeholder="Masukkan Ruang Kelas" value="<?=@$ruang?>">
+            <br>
+            <label>Hari / Tanggal</label>
+            <input type="date" name="waktu" id="waktu">
+            <br>
+            <input type="submit" value="Edit">
+        </form>
+        </div>
 </div>
+
+<script>
+    function togglePopup() {
+    var popup = document.getElementById("myPopup");
+    if (popup.style.display === "none") {
+        popup.style.display = "block";
+    } else {
+        popup.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
-
