@@ -5,7 +5,7 @@ if (isset($_POST['daftar'])){
     if (tambah($_POST) > 0) {
         echo "<script> 
                 alert('Berhasil mendaftar akun');
-                document.location.href='dashboard.php';
+                document.location.href='login.php';
             </script>";
     } else {
         echo "<script> 

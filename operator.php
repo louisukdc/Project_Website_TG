@@ -1,3 +1,13 @@
+<?php
+    session_start(); // Memulai session
+
+    if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
+        header("Location: login.php"); // Redirect ke halaman login
+        exit;
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,6 +56,7 @@
     <a href= dosen.php ><i class="fas fa-cogs"></i><span>Dosen</span></a>
     <a href= matkul.php ><i class="fas fa-table"></i><span>Matakuliah</span></a>
     <a href= operator.php ><i class="fas fa-th"></i><span>Operator</span></a>
+    <a href= logout.php ><i class="logout"></i><span>Log Out</span></a>
 
 </div>
 <!--sidebar end-->
@@ -67,14 +78,14 @@
 <br>
         <table border="2">
             <tr>
+                <th>ID</th>
                 <th>Nama</th>
-                <th>Username</th>
                 <th>Email</th>
                 <th>Aksi</th>
             </tr>
             <?php 
                 include "koneksi.php";
-                $sql = "SELECT * FROM t_jadwal";
+                $sql = "SELECT * FROM t_admin";
                 $tampil = mysqli_query($con,$sql);
                 if(mysqli_num_rows($tampil) == 0) {
                     echo "<tr><td colspan='7'>Tidak ada data yang tersedia.</td></tr>";
@@ -82,12 +93,12 @@
                     while($data = mysqli_fetch_array($tampil)) :
             ?>
             <tr>
-                <td><?=$data['kode'];?></td>
-                <td><?=$data['semester'];?></td>
-                <td><?=$data['matakuliah'];?></td>
-                <td><?=$data['dosen'];?></td>
-                <td><?=$data['ruang'];?></td>
-                <td><?=$data['hari'];?></td>
+                <td><?=$data['ID_Admin'];?></td>
+                <td><?=$data['Namadosen'];?></td>
+                <td><?=$data['Email'];?></td>
+                <td>
+                    <a href="dosen.php?hal=hapus&id=<?=$data['ID_Admin']?>">Hapus</a>
+                </td>
             </tr>
             <?php endwhile; } ?>
         </table>
