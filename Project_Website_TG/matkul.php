@@ -8,19 +8,26 @@ if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
 }
 
 
-if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['MataKuliah_ID'])) {
-    $id = $_GET['MataKuliah_ID'];
-    $hapus = mysqli_query($con, "DELETE FROM t_matakuliah WHERE kode = '$id'");
+// Memeriksa apakah parameter 'hal' dan 'id' ada
+if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Eksekusi query DELETE untuk menghapus data berdasarkan 'MataKuliah_ID' yang diterima
+    $hapus = mysqli_query($con, "DELETE FROM t_matakuliah WHERE MataKuliah_ID = '$id'");
+
+    // Memeriksa apakah penghapusan berhasil atau gagal
     if ($hapus) {
         echo "<script>alert('Data Berhasil Dihapus');
-        window.location='matkul.php';        
+        window.location='matakuliah.php';        
         </script>";
     } else {
         echo "<script>alert('Data Gagal Dihapus');
-        window.location='matkul.php';        
+        window.location='matakuliah.php';        
         </script>";
     }
 }
+?>
+
 
 ?>
 <!DOCTYPE html>
@@ -172,11 +179,11 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['MataKuliah_ID
     <br>
     <br>
          <div id="popup">
-  <span class="span-header"><h2>Tambah Data Dosen</h2></span>
+  <span class="span-header"><h2>Tambah Mata Kuliah</h2></span>
   <span id="popup-close" onclick="hidePopup()">X</span>
   <form action="prosesmatkul.php" method="post">
     <label>Kode</label>
-    <input type="text" name="MataKuliah_ID" id="MataKuliah_ID" placeholder="Masukkan Kode Dosen">
+    <input type="text" name="MataKuliah_ID" id="MataKuliah_ID" placeholder="Masukkan Kode">
     <br>
     <label>Matakuliah</label>
     <input type="text" name="NamaMataKuliah" id="NamaMataKuliah" placeholder="Masukkan Nama Matakuliah">
