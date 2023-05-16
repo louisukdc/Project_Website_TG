@@ -1,13 +1,35 @@
-<?php
-    session_start(); // Memulai session
+<?php 
+session_start(); // Memulai session
+include 'koneksi.php';
 
-    if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
-        header("Location: login.php"); // Redirect ke halaman login
-        exit;
+if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
+    header("Location: login.php"); // Redirect ke halaman login
+    exit;
+}
+
+
+// Memeriksa apakah parameter 'hal' dan 'id' ada
+if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
+    $id = $_GET['id'];
+
+    // Eksekusi query DELETE untuk menghapus data berdasarkan 'MataKuliah_ID' yang diterima
+    $hapus = mysqli_query($con, "DELETE FROM t_matakuliah WHERE MataKuliah_ID = '$id'");
+
+    // Memeriksa apakah penghapusan berhasil atau gagal
+    if ($hapus) {
+        echo "<script>alert('Data Berhasil Dihapus');
+        window.location='matkul.php';        
+        </script>";
+    } else {
+        echo "<script>alert('Data Gagal Dihapus');
+        window.location='matkul.php';        
+        </script>";
     }
+}
 ?>
 
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,9 +39,89 @@
     <title>SIAKAD</title>
 
     <link rel="stylesheet" href="style/navbar_style.css">
+    <script src="js/jquery.min.js"></script>
+    <style>
+        .popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 9999;
+}
+
+.popup form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  max-width: 90%;
+}
+
+.popup form label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.popup form input {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.popup form input[type="submit"]{
+  background-color: #4CAF50;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.popup form input[type="submit"]:hover {
+  background-color: #3e8e41;
+}
+
+
+.span-header {
+  display: block;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#popup-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #333;
+  border-radius: 50%;
+  padding: 5px 8px;
+  line-height: 1;
+  transition: background-color 0.2s ease-in-out;
+}
+
+#popup-close:hover {
+  background-color: #555;
+}
+
+    </style>
 </head>
 <body>
-    <input type="checkbox" id="check">
+<input type="checkbox" id="check">
 <!--header area start-->
 <header>
     <label for="check">
@@ -63,10 +165,9 @@
 
 <div class="content">
     <div class="card">
-    </table>
-        <button type="submit">Tambah</button>
-<br>
-<br>
+         <button onclick="showPopup()" type="submit">Tambah </button>
+    <br>
+    <br>
         <input type="text" name="show" id="show">
         <label for="show">Show</label>
 
@@ -75,20 +176,36 @@
 
         <input type="text" name="show" id="show">
         <label for="show">Search</label>        
-<br>
+    <br>
+    <br>
+         <div id="popup">
+  <span class="span-header"><h2>Tambah Mata Kuliah</h2></span>
+  <span id="popup-close" onclick="hidePopup()">X</span>
+  <form action="prosesmatkul.php" method="post">
+    <label>Kode</label>
+    <input type="text" name="MataKuliah_ID" id="MataKuliah_ID" placeholder="Masukkan Kode">
+    <br>
+    <label>Matakuliah</label>
+    <input type="text" name="NamaMataKuliah" id="NamaMataKuliah" placeholder="Masukkan Nama Matakuliah">
+    <br>
+    <input type="submit" value="Simpan">
+  </form>
+</div>
+<br>		 
+
 <br>
         <table border="2">
             <tr>
                 <th>Kode</th>
                 <th>Matakuliah</th>
                 <th>SKS</th>
-                <th>Semester</th>
-                <th>Dosen</th>
-                <th>Aksi</th>
+                <th>SEMESTER</th>
+                <th>DOSEN</th>
+                <th>AKSI</th>
             </tr>
             <?php 
                 include "koneksi.php";
-                $sql = "SELECT * FROM t_jadwal";
+                $sql = "SELECT * FROM t_matakuliah";
                 $tampil = mysqli_query($con,$sql);
                 if(mysqli_num_rows($tampil) == 0) {
                     echo "<tr><td colspan='7'>Tidak ada data yang tersedia.</td></tr>";
@@ -96,14 +213,42 @@
                     while($data = mysqli_fetch_array($tampil)) :
             ?>
             <tr>
-                <td><?=$data['kode'];?></td>
-                <td><?=$data['semester'];?></td>
-                <td><?=$data['matakuliah'];?></td>
-                <td><?=$data['dosen'];?></td>
-                <td><?=$data['ruang'];?></td>
-                <td><?=$data['hari'];?></td>
+                <td><?=$data['MataKuliah_ID'];?></td>
+                <td><?=$data['NamaMataKuliah'];?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a class href="#?hal=edit&id=<?=@$data['MataKuliah_ID']?>" onclick="togglePopup()">Edit</a>
+                    <a href="matkul.php?hal=hapus&id=<?=@$data['MataKuliah_ID']?>">Hapus</a>
+                </td>
             </tr>
+            
             <?php endwhile; } ?>
         </table>
+        <div class="popup" id="myPopup">
+        <span id="popup-close" onclick="togglePopup()">&times;</span>
+        <form action="update.php" method="post">
+            <label>MataKuliah_ID</label>
+            <input type="text" name="MataKuliah_ID" id="MataKuliah_ID" placeholder="Masukkan Kode Mata Kuliah" value="<?=@$MataKuliah_ID?>">
+            <br>
+            <label>NamaMataKuliah</label>
+            <input type="text" name="NamaMataKuliah" id="NamaMataKuliah" placeholder="Masukkan Nama Mata Kuliah" value="<?=@$NamaMataKuliah?>">
+            <br>
+            <input type="submit" value="Edit">
+        </form>
+        </div>
+</div>
+
+<script>
+    function togglePopup() {
+    var popup = document.getElementById("myPopup");
+    if (popup.style.display === "none") {
+        popup.style.display = "block";
+    } else {
+        popup.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
