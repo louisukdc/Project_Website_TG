@@ -18,11 +18,11 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
     // Memeriksa apakah penghapusan berhasil atau gagal
     if ($hapus) {
         echo "<script>alert('Data Berhasil Dihapus');
-        window.location='matakuliah.php';        
+        window.location='matkul.php';        
         </script>";
     } else {
         echo "<script>alert('Data Gagal Dihapus');
-        window.location='matakuliah.php';        
+        window.location='matkul.php';        
         </script>";
     }
 }
