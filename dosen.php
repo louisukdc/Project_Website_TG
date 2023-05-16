@@ -111,6 +111,13 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
   background-color: #555;
 }
 
+select, option {
+    padding: 10px;
+    padding-right: 5em;
+    margin-top: 2px;
+    font-size: 10px;
+}
+
     </style>
 </head>
 <body>
@@ -170,7 +177,17 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
     <input type="text" name="semester" id="semester" placeholder="Masukkan Semester">
     <br>
     <label>Matakuliah</label>
-    <input type="text" name="matakuliah" id="matakuliah" placeholder="Masukkan Matakuliah">
+    <select name="matakuliah" id="matakuliah">
+        <option>Pilih Matakuliah</option>
+                <?php 
+                    include 'koneksi.php';
+                    $cb = mysqli_query($con, "SELECT * FROM t_matakuliah");
+                    while ($data = mysqli_fetch_array($cb)) {
+                        // $selected = ($data['MataKuliah_ID'] == $vkodep) ? 'selected' : '';
+                        echo "<option value='$data[MataKuliah_ID]' $selected>$data[NamaMataKuliah]</option>";
+                    }
+                ?>    
+    </select>
     <br>
     <label>Dosen</label>
     <input type="text" name="dosen" id="dosen" placeholder="Masukkan Nama Dosen">
