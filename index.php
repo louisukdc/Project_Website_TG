@@ -53,7 +53,8 @@
     </div>
     <a href= index.php><i class="fas fa-desktop"></i><span>Dashboard</span></a>
     <a href= dosen.php ><i class="fas fa-cogs"></i><span>Dosen</span></a>
-    <a href= matkul.php ><i class="fas fa-table"></i><span>Matakuliah</span></a>
+    <a href= matkul.php ><i class="fas fa-table"></i><span> Matakuliah</span></a>
+    <a href= penjadwalan.php ><i class="fas fa-table"></i><span> Penjadwalan Matakuliah</span></a>
     <a href= operator.php ><i class="fas fa-th"></i><span>Operator</span></a>
     <a href= logout.php ><i class="logout"></i><span>Log Out</span></a>
 </div>
