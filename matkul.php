@@ -188,6 +188,12 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
     <label>Matakuliah</label>
     <input type="text" name="NamaMataKuliah" id="NamaMataKuliah" placeholder="Masukkan Nama Matakuliah">
     <br>
+    <label>SKS</label>
+    <input type="text" name="sks" id="sks" placeholder="Masukkan SKS">
+    <br>
+    <label>Semester</label>
+    <input type="text" name="semester" id="semester" placeholder="Masukkan Semester">
+    <br>
     <input type="submit" value="Simpan">
   </form>
 </div>
@@ -200,7 +206,6 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
                 <th>Matakuliah</th>
                 <th>SKS</th>
                 <th>SEMESTER</th>
-                <th>DOSEN</th>
                 <th>AKSI</th>
             </tr>
             <?php 
@@ -215,9 +220,8 @@ if (isset($_GET['hal']) && $_GET['hal'] == "hapus" && isset($_GET['id'])) {
             <tr>
                 <td><?=$data['MataKuliah_ID'];?></td>
                 <td><?=$data['NamaMataKuliah'];?></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?=$data['sks'];?></td>
+                <td><?=$data['semester'];?></td>
                 <td>
                     <a class href="#?hal=edit&id=<?=@$data['MataKuliah_ID']?>" onclick="togglePopup()">Edit</a>
                     <a href="matkul.php?hal=hapus&id=<?=@$data['MataKuliah_ID']?>">Hapus</a>
