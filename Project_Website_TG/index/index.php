@@ -2,83 +2,42 @@
     session_start(); // Memulai session
 
     if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
-        header("Location: login.php"); // Redirect ke halaman login
+        header("Location:../login.php"); // Redirect ke halaman login
         exit;
     }
 
-    // include '../koneksi.php';
-
     include '../koneksi.php';
+$sql = "SELECT COUNT(*) AS count FROM t_admin"; // Menggunakan alias 'count'
+$sql2 = "SELECT COUNT(*) AS count FROM t_matakuliah"; // Menggunakan alias 'count'
+$sql3 = "SELECT COUNT(*) AS count FROM t_dosen"; // Menggunakan alias 'count'
+$result = $con->query($sql);
+$result2 = $con->query($sql2);
+$result3 = $con->query($sql3);
 
-    // Menghitung jumlah dosen
-    $sqlDosen = "SELECT COUNT(*) AS count_dosen FROM t_dosen";
-    $resultDosen = $con->query($sqlDosen);
-    $dosenCount = 0;
-    
-    if ($resultDosen->num_rows > 0) {
-        while($row = $resultDosen->fetch_assoc()) {
-            $dosenCount = $row['count_dosen'];
-        }
-    } else {
-        echo "Tidak ada data dosen.";
+if ($result->num_rows > 0) {
+    // Menampilkan data
+    while($row = $result->fetch_assoc()) {
+        $operatorCount = $row['count']; // Menggunakan kunci 'count' yang telah di-alias
     }
-    
-    // Menghitung jumlah matakuliah
-    $sqlMatakuliah = "SELECT COUNT(*) AS count_matakuliah FROM t_matakuliah";
-    $resultMatakuliah = $con->query($sqlMatakuliah);
-    $matakuliahCount = 0;
-    
-    if ($resultMatakuliah->num_rows > 0) {
-        while($row = $resultMatakuliah->fetch_assoc()) {
-            $matakuliahCount = $row['count_matakuliah'];
-        }
-    } else {
-        echo "Tidak ada data matakuliah.";
-    }
-    
-    // Menghitung jumlah operator
-    $sqlOperator = "SELECT COUNT(*) AS count_operator FROM t_admin"; // Menggunakan alias 'count_operator'
-    $resultOperator = $con->query($sqlOperator);
-    $operatorCount = 0;
-    
-    if ($resultOperator->num_rows > 0) {
-        while($row = $resultOperator->fetch_assoc()) {
-            $operatorCount = $row['count_operator']; // Menggunakan kunci 'count_operator' yang telah di-alias
-        }
-    } else {
-        echo "Tidak ada data operator.";
-    }
-    
-    echo "Jumlah dosen: " . $dosenCount . "<br>";
-    echo "Jumlah matakuliah: " . $matakuliahCount . "<br>";
-    echo "Jumlah operator: " . $operatorCount;
-    
-
-// include '../Dosen/koneksi/koneksi.php';
-// $sql = "SELECT COUNT(*) AS count FROM t_dosen"; // Menggunakan alias 'count'
-// $result = $con->query($sql);
-
-// if ($result->num_rows > 0) {
-//     // Menampilkan data
-//     while($row = $result->fetch_assoc()) {
-//         $dosenCount = $row['count']; // Menggunakan kunci 'count' yang telah di-alias
-//     }
-// } else {
-//     echo "Tidak ada data.";
-// }
-
-// include '../matakuliah/koneksi/koneksi.php';
-// $sql = "SELECT COUNT(*) AS count FROM t_matakuliah"; // Menggunakan alias 'count'
-// $result = $con->query($sql);
-
-// if ($result->num_rows > 0) {
-//     // Menampilkan data
-//     while($row = $result->fetch_assoc()) {
-//         $matakuliahCount = $row['count']; // Menggunakan kunci 'count' yang telah di-alias
-//     }
-// } else {
-//     echo "Tidak ada data.";
-// }
+} else {
+    echo "Tidak ada data.";
+}
+if ($result2->num_rows > 0) {
+  // Menampilkan data
+  while($row = $result2->fetch_assoc()) {
+      $operatorCount2 = $row['count']; // Menggunakan kunci 'count' yang telah di-alias
+  }
+} else {
+  echo "Tidak ada data.";
+}
+if ($result3->num_rows > 0) {
+  // Menampilkan data
+  while($row = $result3->fetch_assoc()) {
+      $operatorCount3 = $row['count']; // Menggunakan kunci 'count' yang telah di-alias
+  }
+} else {
+  echo "Tidak ada data.";
+}
 
 $con->close();
 ?>
@@ -91,15 +50,27 @@ $con->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SIAKAD</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="../style/navbar_style.css">
     <link rel="stylesheet" href="../style/card.css">
+    <!-- <style>
+      .table-left {
+        float: left;
+      }
+      thead tr {
+        background-color: #232;
+        color :white;
+      }
+      .apa {
+        color: white;
+      }
+    </style> -->
 </head>
 <body>
 <?php include('../navbar/navbar.php') ?>
 
 <div class="content">
-    <div class="card">
-        <div class="card">
+        <div class="">
         <select name="Tahun" id="Tahun">
             <option value="2020/1">2020/1</option>
             <option value="2020/2">2020/2</option>
@@ -110,7 +81,7 @@ $con->close();
 
 <br>
 
-        <input type="text" name="show" id="show">
+        <!-- <input type="text" name="show" id="show">
         <label for="show">Show</label>
 
         <input type="text" name="show" id="show">
@@ -120,20 +91,20 @@ $con->close();
         <label for="show">Search</label>        
 
 <br>
-<br>
+<br> -->
 <div class="card-container">
   <div class="card-index">
     <img src="../image/Dosen.png" alt="Dosen">
     <div class="card-content">
       <h2>Dosen</h2>
-      <p id="dosenCount"><?php echo $dosenCount; ?></p>
+      <p id="dosenCount"><?php echo $operatorCount3; ?></p>
     </div>
   </div>
   <div class="card-index">
     <img src="../image/matkul.png" alt="Matakuliah">
     <div class="card-content">
       <h2>Matakuliah</h2>
-      <p id="matakuliahCount"><?php echo $matakuliahCount; ?></p>
+      <p id="matakuliahCount"><?php echo $operatorCount2; ?></p>
     </div>
   </div>
   <div class="card-index">
@@ -147,16 +118,18 @@ $con->close();
 
 <br>
 <br>
-        <table border="2">
-            <tr>
-                <th>Kode</th>
-                <th>Semester</th>
-                <th>Matakuliah</th>
-                <th>Dosen</th>
-                <th>Ruang</th>
-                <th>Hari/Tanggal</th>
-                <th>Aksi</th>
+        <table class="table table-bordered text-center float-start">
+          <thead>
+            <tr class="table-primary">
+              <th>Kode</th>
+              <th>Semester</th>
+              <th>Matakuliah</th>
+              <th>Dosen</th>
+              <th>Ruang</th>
+              <th>Hari/Tanggal</th>
+              <th>Aksi</th>
             </tr>
+          </thead>
             <?php 
                 include "../koneksi.php";
                 $sql = "SELECT * FROM t_jadwal";

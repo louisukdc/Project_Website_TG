@@ -14,7 +14,7 @@ function query($query){
 
 function tambah($data){
     global $conn;
-    $id = $data['idMatkul'];
+    $id = $data['kode'];
     $matkul = $data['matkul'];
     $sem = $data['semester'];
 
@@ -28,7 +28,7 @@ function tambah($data){
 
 function edit($data){
     global $conn;
-    $id = $data['idMatkul'];
+    $id = $data['kode'];
     $matkul = $data['matkul'];
     $sem = $data['semester'];
 

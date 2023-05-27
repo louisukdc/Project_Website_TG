@@ -1,8 +1,8 @@
-<?php 
+<?php
 session_start();
-$conn = mysqli_connect("localhost","root","","penjadwalan");
+$conn = mysqli_connect("localhost", "root", "", "penjadwalan");
 
-if (isset($_POST['login'])){
+if (isset($_POST['login'])) {
     $id = $_POST['user'];
     $pw = $_POST['pw'];
     $cek = mysqli_query($conn, "SELECT * FROM t_admin WHERE ID_ADMIN='$id'");
@@ -10,16 +10,13 @@ if (isset($_POST['login'])){
         $row = mysqli_fetch_assoc($cek);
         if ($pw === $row['Password']) {
             $_SESSION['nama'] = $id;
-            header('location: http://localhost:3000/Project_Website_TG/index/index.php');
+            header('location: index/index.php');
         } else {
             echo "Nama pengguna dan kata kunci tidak ditemukan";
         }
     }
-    
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,25 +32,56 @@ if (isset($_POST['login'])){
 
 <body>
 
-<div class="wrapper">
- 	<div class="heading">
- 		<h1>Login Form</h1>
- 	</div>
-	<div class="form">
-    <form action="" method="post">
- 			<span>
- 				<i class="fa fa-user"></i>
- 				<input type="text" placeholder="Username" name="user">
- 			</span><br>
- 			<span>
-                <i class="fa-solid fa-lock"></i>
- 				<input type="password" placeholder="Password" name="pw">
- 			</span><br>
- 				<button name="login">Login</button>
-		</form>
-	</div>
- 	</div>
- </div>
-</body>
-</html>
+    <!----------------------- Main Container -------------------------->
 
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+        <!----------------------- Login Container -------------------------->
+
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+            <!--------------------------- Left Box ----------------------------->
+
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
+                <div class="featured-image">
+                    <img src="image/gedung.jpg" class="img-fluid rounded-3">
+                </div>
+            </div>
+
+            <!-------------------- ------ Right Box ---------------------------->
+
+            <div class="col-md-6 right-box">
+                <div class="col align-items-center">
+                    <div class="header-text mb-4">
+                        <h1>Selamat Datang</h1>
+                        <h3>Masuk akun</h3>
+                    </div>
+                    <form action="" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Username" name="user">
+                        </div>
+                        <div class="input-group mb-2">
+                            <input type="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password" name="pw">
+                        </div>
+                        <div class="input-group mb-3 d-flex justify-content-between">
+                            <div class="form-check grid gap-3">
+                                <input type="checkbox" class="form-check-input " id="formCheck">
+                                <label for="formCheck" class="form-check-label text-secondary"><small>Ingat Saya</small></label>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <button class="btn btn-lg btn-primary w-100 fs-6" name="login">Login</button>
+                        </div>
+                        <!-- <div class="row">
+                            <small>Tidak punya akun? <a href="signup.php">Daftar</a></small>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>

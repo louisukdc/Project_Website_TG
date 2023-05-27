@@ -14,11 +14,12 @@ function query($query){
 
 function tambah($data){
     global $conn;
-    $nidn = $data['nidn'];
-    $dosen = $data['dosen'];
+    $id = $data['lid'];
+    $nidn = $data['lnidn'];
+    $dosen = $data['ldosen'];
 
     $query = "INSERT INTO t_dosen
-                values('$nidn','$dosen')
+                values('$id','$nidn','$dosen')
             ";
 
     mysqli_query($conn, $query);
@@ -27,22 +28,18 @@ function tambah($data){
 
 function edit($data){
     global $conn;
-    $nidn = $data['nidn'];
-    $dosen = $data['dosen'];
+    $nidn = $data['lnidn'];
+    $dosen = $data['ldosen'];
+    $qry = "UPDATE t_dosen SET dosen = '$dosen' WHERE nidn ='$nidn'";
 
-    $query = "UPDATE t_dosen SET
-                dosen = '$dosen'
-            WHERE nidn = '$nidn';
-            ";
-
-    mysqli_query($conn, $query);
+    mysqli_query($conn, $qry);
     return mysqli_affected_rows($conn);
 }
 
 function hapus($id) {
     global $conn;
-    
-    mysqli_query($conn,"DELETE FROM t_dosen WHERE nidn='$id'");
+    $nidn = $id['lid'];
+    mysqli_query($conn,"DELETE FROM t_dosen  WHERE nidn ='$nidn'");
 
     return mysqli_affected_rows($conn);
 }
