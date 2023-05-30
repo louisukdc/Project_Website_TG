@@ -1,0 +1,42 @@
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  gap: 20px;
+}
+
+.icon {
+  background-image: url('../image/IF_jadwal.ico');
+  /* Atur ukuran, posisi, dan properti latar belakang lainnya sesuai kebutuhan */
+} 
+
+.card-index {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.card-index img {
+  width: 60%;
+  border-radius: 8px;
+}
+
+.card-index .card-content {
+  margin-top: 12px;
+  text-align: center;
+}
+
+.card-index h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.card-index p {
+  font-size: 14px;
+  color: #555;
+}
