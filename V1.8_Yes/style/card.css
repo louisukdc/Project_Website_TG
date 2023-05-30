@@ -5,6 +5,11 @@
   gap: 20px;
 }
 
+.icon {
+  background-image: url('../image/IF_jadwal.ico');
+  /* Atur ukuran, posisi, dan properti latar belakang lainnya sesuai kebutuhan */
+} 
+
 .card-index {
   display: flex;
   justify-content: center;

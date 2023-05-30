@@ -4,6 +4,11 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.icon {
+  background-image: url('../image/IF_jadwal.ico');
+  /* Atur ukuran, posisi, dan properti latar belakang lainnya sesuai kebutuhan */
+} 
+
 header {
   z-index: 1;
   position: fixed;

@@ -30,12 +30,12 @@
             <img src="../image/gedung.jpg" class="profile_image" alt="">
             <h4>Admin</h4>
         </div>
-        <a href="http://localhost:8080/PHP/Project_Website_TG/index/index.php"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
-        <a href="http://localhost:8080/PHP/Project_Website_TG/Dosen/dosen.php"><i class="fas fa-cogs"></i><span>Dosen</span></a>
-        <a href="http://localhost:8080/PHP/Project_Website_TG/matakuliah/matkul.php"><i class="fas fa-table"></i><span>Matakuliah</span></a>
-        <a href="http://localhost:8080/PHP/Project_Website_TG/operator/operator.php"><i class="fas fa-th"></i><span>Operator</span></a>
-        <a href="http://localhost:8080/PHP/Project_Website_TG/jadwal/jadwal.php"><i class="fas fa-th"></i><span>Penjadwalan</span></a>
-        <a href="http://localhost:8080/PHP/Project_Website_TG/logout.php"><i class="logout"></i><span>Log Out</span></a>
+        <a href="http://localhost:3000/index/index.php"><i class="fas fa-desktop"></i><span>Dashboard</span></a>
+        <a href="http://localhost:3000/Dosen/dosen.php"><i class="fas fa-cogs"></i><span>Dosen</span></a>
+        <a href="http://localhost:3000/matakuliah/matkul.php"><i class="fas fa-table"></i><span>Matakuliah</span></a>
+        <a href="http://localhost:3000/operator/operator.php"><i class="fas fa-th"></i><span>Operator</span></a>
+        <a href="http://localhost:3000/jadwal/jadwal.php"><i class="fas fa-th"></i><span>Penjadwalan</span></a>
+        <a href="http://localhost:3000/logout.php"><i class="logout"></i><span>Log Out</span></a>
 
     </div>
     <!--sidebar end-->

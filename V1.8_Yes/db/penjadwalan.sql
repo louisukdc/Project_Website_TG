@@ -68,14 +68,16 @@ INSERT INTO `t_dosen` (`id`, `nidn`, `dosen`) VALUES
 --
 
 CREATE TABLE `t_hasil` (
-  `Hasil_ID` int(20) NOT NULL,
+  `Hasil_ID` int(20) NOT NULL AUTO_INCREMENT,
   `NamaMataKuliah` varchar(30) NOT NULL,
   `Kelas_ID` int(20) NOT NULL,
   `SKS` int(10) NOT NULL,
   `MataKuliah_ID` int(20) NOT NULL,
   `ID_Admin` int(5) NOT NULL,
-  `Jadwal_ID` int(20) NOT NULL
+  `Jadwal_ID` int(20) NOT NULL,
+  PRIMARY KEY (`Hasil_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 -- --------------------------------------------------------
 

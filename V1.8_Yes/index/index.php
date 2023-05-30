@@ -2,7 +2,7 @@
     session_start(); // Memulai session
 
     if(!isset($_SESSION["nama"])) { // Jika session login belum terdaftar
-        header("Location:../login.php"); // Redirect ke halaman login
+        header("Location: login.php"); // Redirect ke halaman login
         exit;
     }
 
@@ -65,6 +65,7 @@ $con->close();
         color: white;
       }
     </style> -->
+    <link href='image/IF_jadwal.ico' rel='shortcut icon'>
 </head>
 <body>
 <?php include('../navbar/navbar.php') ?>

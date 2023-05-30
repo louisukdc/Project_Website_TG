@@ -124,3 +124,8 @@ label{
     margin-top: 12px;
     padding: 1px 19px;
 }
+
+.icon {
+  background-image: url('../image/IF_jadwal.ico');
+  /* Atur ukuran, posisi, dan properti latar belakang lainnya sesuai kebutuhan */
+} 
