@@ -13,5 +13,5 @@ Versi 1.9.2 Now Available :
 - Menambahkan icon pada sidebar
 
 Versi 1.9.2 V2 Now Available :
--Menambahkan fungsi Algoritma Welch Powell
+- Menambahkan fungsi Algoritma Welch Powell
 
