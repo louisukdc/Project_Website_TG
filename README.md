@@ -7,3 +7,7 @@ Versi 1.7-v2
 
 Versi 1.9.1 Now Availabel
 - Fix issue dropdown di beberapa menu
+
+Versi 1.9.2 Now Availabel :
+- Merubah tampilan login
+- Menambahkan icon pada sidebar
