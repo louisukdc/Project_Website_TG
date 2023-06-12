@@ -18,4 +18,4 @@ Tentang Website :
 - UI yang user-friendly
 
 Pembuatan Website :
-Seluruh Anggota Informatika Angkatan 2021
+Seluruh Mahasiswa Informatika Universitas Katolik Darma Cendika Angkatan 2021
