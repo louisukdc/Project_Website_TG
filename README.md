@@ -11,3 +11,11 @@ Versi 1.9.1 Now Availabel
 Versi 1.9.2 Now Availabel :
 - Merubah tampilan login
 - Menambahkan icon pada sidebar
+
+Website Penjawalan Dengan Algoritma Welch Powel is Avaiable !!
+Tentang Website :
+- Merangkai Jadwal Perkuliahan dengan Algoritma Welch - Powell
+- UI yang user-friendly
+
+Pembuatan Website :
+Seluruh Mahasiswa Informatika Universitas Katolik Darma Cendika Angkatan 2021
